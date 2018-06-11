@@ -99,20 +99,3 @@ void Graph::print() {
 	}
 	cout << "+===========================+" << endl;
 }
-
-/*int main () {
-	Graph* graph = new Graph(3);
-
-	graph->addArrest(0, 1, 1000);
-	graph->addArrest(0, 2, 800);
-	graph->addArrest(1, 2, 100);
-	graph->addArrest(2, 0, 4000);
-	graph->addArrest(2, 1, 3000);
-
-	cout << graph->hasNeighbor(2, 1) << endl;
-	graph->print();
-
-	delete graph;
-
-	return 0;
-}*/

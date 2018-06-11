@@ -1,6 +1,11 @@
 #ifndef _PAIR_H_
 #define _PAIR_H_
 
+#include <iostream>
+using std::ostream;
+using std::cout;
+using std::endl;
+
 class Pair {
 	private:
 		int value;
@@ -19,11 +24,10 @@ class Pair {
 		/** Overhead of the operator */
 		bool operator== (Pair &p);
 
-		/** Overhead of the operator < */ 
-		bool operator< (Pair &p);
+		friend bool operator< (Pair const&p1, Pair const&p2);
 
 		/** Overhead of the operator <= */ 
-		bool operator<= (Pair &p);
+		friend ostream& operator<<(ostream &o, Pair &p);
 };
 
 #endif

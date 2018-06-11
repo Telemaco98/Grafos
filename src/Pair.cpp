@@ -46,15 +46,20 @@ bool Pair::operator== (Pair &p) {
 /**
  * Overhead of the operator <
  * @param 	Pair 	&p
+ * @param 	Pair 	&p2
  * @return 	true/false
  */ 
-bool Pair::operator< (Pair &p) {
-	if(value < p.value) return true;
-	return false;
+bool operator< (Pair const&p1, Pair const&p2) {
+	return (p1.value < p2.value);
 }
 
-/** Overhead of the operator <= */ 
-bool Pair::operator<= (Pair &p) {
-	if(value < p.value) return true;
-	return false;	
+/**
+ * Sobrecarga do operador << 
+ * @param 	ostream 	&o
+ * @param 	Pair 	&p
+ * @return 	p.print()
+ **/ 
+ostream& operator<<(ostream &o, Pair &p) {
+	o << "( " << p.value << ", " << p.key << " )" << endl;
+	return o;
 }
