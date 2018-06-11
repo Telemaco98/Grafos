@@ -1,19 +1,21 @@
 #ifndef _DIJKSTRA_H_
 #define _DIJKSTRA_H_ value
 
-#import <list>
+#include <list>
 using std::list;
 
-#import <set>
+#include <set>
 using std::set;
 
-#import "Graph.h"
+#include <chrono>
+using namespace std::chrono;
 
-void dijkstra (int origin, int destiny, Graph* graph);
+#include "Graph.h"
+#include "Pair.h"
 
-void calculateDijkstra (int origin, int destiny, Graph* graph, int* distances, int* origins, set<int> nodesWithoutCoust);
+int dijkstra (int origin, int destiny, Graph* graph);
 
-int extractMin(int* distances, int size);
+void calculateDijkstra (int origin, int destiny, Graph* graph, int* distances, int* origins, set<Pair> nodesWithoutCoust);
 
 void doWay (int origin, int destiny, int* origins);
 
