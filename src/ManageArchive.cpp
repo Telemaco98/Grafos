@@ -14,7 +14,8 @@
  * @brief This function clean the output archive 
  */
 void cleanOutputArchives () {
-	cout << " # Cleaning the output archives..." << endl;
+	cout << " # ================================================" << endl;
+	cout << " # Cleaning the output archives ..." << endl;
 	string pathArchive = "../data/output/output.dat";
 
 	ofstream output;
@@ -28,31 +29,33 @@ void cleanOutputArchives () {
  * @param  pathArchive The path with the archive name
  * @return matriz      The archive matrix extracted 
  */
-float** extractArchive (string pathArchive) {
+int** extractArchive (string pathArchive) {
 	ifstream input(pathArchive.c_str());
-	float** matrix = NULL;
+	int** matrix = NULL;
 
 	if (!input) {
 		cout << " # ERROR: Can not read the input archive, it doesn't exists!" << endl;
 	} else {
 		cout << " # Initializing the matrix ..." << endl;
-		
+		string archiveHeader;
+		getline(input, archiveHeader);
+		cout << " # " << archiveHeader << endl; // print the header archive
+
 		string matrixSizeString;
 		getline(input, matrixSizeString); // getting the matrix size
 		int matrixSize = atoi(matrixSizeString.c_str());
 
-		float **matrix = inicializeMatrix (matrixSize);
+		int **matrix = inicializeMatrix (matrixSize);
 
 		cout << " # Extracting the matrix of " + pathArchive << endl;
+		
+		while (!input.eof()) {
+			string a;
+			input >> a;
+			int arrestI, arrestJ, distance;
+			input >> arrestI >> arrestJ >> distance;
 
-		for ( int i = 0; i < matrixSize; i++ ) {
-			for ( int j = 0; j < matrixSize; j++ ) {
-				string valueString;
-				input >> valueString;
-				// cout << valueString + " " ;
-				matrix[i][j] = atof(valueString.c_str());
-			}
-			// cout << endl;
+			matrix[arrestI][arrestJ] = distance;
 		}
 	}
 	return matrix;
@@ -63,10 +66,34 @@ float** extractArchive (string pathArchive) {
  * @param  size 	The size of the Matrix
  * @return matrix 	The matrix initialized
  */
-float ** inicializeMatrix (int size) {
-	float** matrix = new float*[size];
+int ** inicializeMatrix (int size) {
+	int** matrix = NULL;
+	matrix = new int*[size];
 	for ( int i = 0; i < size; i++ )
-		matrix[i] = new float[size];
+		matrix[i] = new int[size];
+
+	cout << " # " << endl;
+	cout << " # ================================================" << endl;
+	cout << " # Setting all matrix positions with zero ..." << endl;
+	for ( int i = 0; i < size; i++ ) {
+		for ( int j = 0; j < size; j++ ) 
+			matrix[i][j] = 0;
+	}
 
 	return matrix;
+}
+
+/**
+ * This function receive a matrix and release the memory occuped by it
+ * @param matrix The martix
+ * @param size   The martix size 
+ */
+void releaseMemory (int** matrix, int size) {
+	cout << " # " << endl;
+	cout << " # Releasing the memory occuped by the matrix " << size << "x" << size << " ..."<< endl;
+
+	for ( int i = 0; i < size; i++)
+		delete [] matrix [i];
+
+	delete [] matrix;
 }

@@ -17,7 +17,6 @@ using std::cout;
 using std::atoi;
 using std::atof;
 
-
 #include <cstring>
 using std::string;
 
@@ -36,13 +35,20 @@ void cleanOutputArchives ();
  * @param  pathArchive The path with the archive name
  * @return matriz      The archive matrix extracted 
  */
-float** extractArchive (string pathArchive);
+int** extractArchive (string pathArchive);
 
 /**
  * This function will initialize a matrix with the input argument
  * @param  size 	The size of the Matrix
  * @return matrix 	The matrix initialized
  */
-float** inicializeMatrix (int size);
+int** inicializeMatrix (int size);
+
+/**
+ * This function receive a matrix and free the memory
+ * @param matrix The martix
+ * @param size   The martix size 
+ */
+void releaseMemory (int** matrix, int size);
 
 #endif

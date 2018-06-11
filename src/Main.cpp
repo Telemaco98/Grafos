@@ -17,11 +17,12 @@ using std::endl;
 #include "Calculates.h"
 
 /**
- * @return
+ * @return 0 
  */
 int main () {
 	cleanOutputArchives ();
-	extractArchive ("../data/input/16x16.txt");
+	int** matrix = extractArchive ("../data/input/USA-road-d.NY.gr");
+	releaseMemory(matrix, 264346);
 
 	// calculate();
  	
