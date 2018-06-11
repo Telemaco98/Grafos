@@ -25,6 +25,8 @@ using std::ifstream;
 using std::ofstream;
 using std::ios;
 
+#include "Graph.h"
+
 /**
  * @brief This function clean the output archive 
  */
@@ -35,20 +37,6 @@ void cleanOutputArchives ();
  * @param  pathArchive The path with the archive name
  * @return matriz      The archive matrix extracted 
  */
-int** extractArchive (string pathArchive);
-
-/**
- * This function will initialize a matrix with the input argument
- * @param  size 	The size of the Matrix
- * @return matrix 	The matrix initialized
- */
-int** inicializeMatrix (int size);
-
-/**
- * This function receive a matrix and free the memory
- * @param matrix The martix
- * @param size   The martix size 
- */
-void releaseMemory (int** matrix, int size);
+Graph* extractArchive (string pathArchive);
 
 #endif

@@ -15,16 +15,20 @@ using std::endl;
 
 #include "ManageArchive.h"
 #include "Calculates.h"
+#include "Graph.h"
 
 /**
  * @return 0 
  */
 int main () {
 	cleanOutputArchives ();
-	int** matrix = extractArchive ("../data/input/USA-road-d.NY.gr");
-	releaseMemory(matrix, 264346);
+	Graph* graph = extractArchive ("../data/input/USA-road-d.NY.gr");
+	// graph->print();
+
+	cout << " # | (ii)   | Deleting the graph ..." << endl;
+	cout << " # ================================================" << endl;
+	delete graph;
 
 	// calculate();
- 	
 	return 0;
 }

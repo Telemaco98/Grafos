@@ -1,9 +1,9 @@
 /**
  * @file 	Graph.h
- * @brief 	This archive is responsible by create the class Graph. A graph class i
+ * @brief 	This archive is responsible by create the class Graph. 
  * 			
  * @author 	Shirley Ohara (shirleyohara@ufrn.edu.br)
- * @since	06/06/2017
+ * @since	09/06/2017
  * @data 	10/10/2017
  */
 
@@ -19,6 +19,12 @@ using std::cout;
 using std::list;
 using std::iterator;
 
+/**
+ * @class Graph
+ * @brief A graph class has like fields the nodes amount and pointer for 
+ * a adjancecy list of pair <int, int> that represents the arrivel 
+ * node and the weight of the arrest. 
+ */
 class Graph {
 	private:
 		int nodesAmount;			/** < The nodes amount */

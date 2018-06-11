@@ -1,3 +1,13 @@
+/**
+ * @file 	Graph.h
+ * @brief 	This archive is responsible by implemets the methods of the
+ * Graph class. 
+ * 			
+ * @author 	Shirley Ohara (shirleyohara@ufrn.edu.br)
+ * @since	09/06/2017
+ * @data 	10/10/2017
+ */
+
 #include "Graph.h"
 
 /** 
@@ -62,24 +72,26 @@ int Graph::nodeDegree (int node) {
  * Prints the graph like a adjacency list
  */
 void Graph::print() {
-	cout << "+===========================+" << endl;
-	cout << "|           Graph           |" << endl;
-	cout << "+===========================+" << endl;
-	cout << "  Origin | Arrival | Weight  " << endl;
-	cout << "+---------------------------+" << endl;
+	cout << "+=============================+" << endl;
+	cout << "|           Graph             |" << endl;
+	cout << "+=============================+" << endl;
+	cout << "  Origin -> (Arrival, Weight)   " << endl;
+	cout << "+-----------------------------+" << endl;
 
 	for (int i = 0; i < nodesAmount; i++) {
+		cout << " " << (i + 1);
 		for (auto it = adj[i].begin(); it != adj[i].end(); it++) {
 			pair<int, int> pair (*it);
-			cout << " " << (i + 1);
-			cout << " - " << (pair.first + 1);
-			cout << " - " << pair.second << endl;
+			cout << " -> ( " << (pair.first + 1);
+			cout << ", " << pair.second << " )";
 		}
+		cout << endl << "-------------------------------" << endl;
+
 	}
 	cout << "+===========================+" << endl;
 }
 
-int main () {
+/*int main () {
 	Graph* graph = new Graph(3);
 
 	graph->addArrest(0, 1, 1000);
@@ -94,4 +106,4 @@ int main () {
 	delete graph;
 
 	return 0;
-}
+}*/
