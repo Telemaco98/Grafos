@@ -69,6 +69,15 @@ int Graph::nodeDegree (int node) {
 }
 
 /** 
+ * Return all the nodes that are adjacenct to a node
+ * @param  node 	The reference node 
+ * @return nei
+ */
+list<pair<int, int>> Graph::neighborhood (int node) {
+	return adj[node];
+}
+
+/** 
  * Prints the graph like a adjacency list
  */
 void Graph::print() {

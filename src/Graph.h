@@ -49,6 +49,9 @@ class Graph {
 		/** Returns the degree of a node  */
 		int nodeDegree (int node);
 
+		/** Return all the nodes that are adjacenct to a node */
+		list<pair<int, int>> neighborhood (int node);
+
 		/** Prints the graph like a adjacency list */
 		void print(); 
 };

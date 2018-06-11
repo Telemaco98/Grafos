@@ -1,12 +1,20 @@
 #ifndef _DIJKSTRA_H_
 #define _DIJKSTRA_H_ value
 
-void dijkstra (int origin, int destiny, float** matrix);
+#import <list>
+using std::list;
 
-void calculateWeight (int origin, int destiny, float** matrix);
+#import <set>
+using std::set;
 
-void doWay (int origin, int destiny, float** matrix);
+#import "Graph.h"
 
-void printWay (int way);
+void dijkstra (int origin, int destiny, Graph* graph);
+
+void calculateDijkstra (int origin, int destiny, Graph* graph, int* distances, int* origins, set<int> nodesWithoutCoust);
+
+int extractMin(int* distances, int size);
+
+void doWay (int origin, int destiny, int* origins);
 
 #endif
