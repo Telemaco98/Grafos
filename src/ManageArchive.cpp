@@ -17,7 +17,7 @@ void cleanOutputArchives () {
 	cout << " # ================================================" << endl;
 	cout << " # | (1)    | Cleaning the output archives ..." << endl;
 	cout << " # +--------+-------------------------------------- " << endl;
-	string pathArchive = "../data/output/output.dat";
+	string pathArchive = "./data/output/output.dat";
 
 	ofstream output;
 	output.open (pathArchive.c_str());
@@ -50,7 +50,7 @@ Graph* extractArchive (string pathArchive) {
 		graph = new Graph(graphSize);
 
 		cout << " # | (i.ii) | Extracting the graph of " + pathArchive << endl;
-		cout << " # +-------+-------------------------------------- " << endl;
+		cout << " # +---------------------------------------------- " << endl;
 		
 		while (!input.eof()) {
 			string a;

@@ -6,7 +6,9 @@ using std::set;
 
 #include "Pair.h"
 
-
+/**
+ * The Pair class constructor
+ */
 Pair::Pair(int v, int k) {
 	value = v;
 	key = k;
