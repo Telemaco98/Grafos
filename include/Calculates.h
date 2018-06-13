@@ -28,7 +28,7 @@ void calculates ();
  * @param origin 	The origin node
  * @param destiny 	The destiny node
  */
-void repeatCalculus (int times, Graph* graph, int origin, int destiny)
+void repeatCalculus (int times, Graph* graph, int origin, int destiny);
 
 /**
  * @brief 	This function calculates the standard deviation of the time values
@@ -36,6 +36,6 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny)
  * @param 	size 	The size of the vector
  * @return 	result 	The result of the media calculus
  */
-int calculateTimeMedia (int vTimes[], int size);
+float calculateTimeMedia (int vTimes[], int size);
 
 #endif

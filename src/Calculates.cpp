@@ -34,7 +34,7 @@ void calculates () {
  */
 void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
 	int algorithmsQuantity = 1; // 4
-	int vectorTimeDijkstra[times];
+	int* vectorTimeDijkstra = new int[times];
 	// int vectorTimeBellmanFord[times];
 	// int vectorTimeFF[times];
 	// int vectorTimeFloyd[times];
@@ -43,7 +43,7 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
 		// Calculate shortest path with Dijkstra
 		cout << CALCULATING + "Dijkstra ..." << endl;
 		vectorTimeDijkstra[i] = dijkstra(origin, destiny, graph);
-		cout << " # | TEMPO COM DIJKSTRA: " << time << endl;
+		// cout << " # | TEMPO COM DIJKSTRA: " << vectorTimeDijkstra[i] << endl;
 
 		// Calculate shortest path with Belmanford
 		// cout << CALCULATING + "Belmanford ..." << endl;
@@ -58,13 +58,15 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
 	}
 
 	float* vectorTimeMedia = new float[algorithmsQuantity];
+ 
+	vectorTimeMedia[0] = calculateTimeMedia (vectorTimeDijkstra, times);
+	// vectorTimeMedia[1] = calculateTimeMedia (vectorTimeBellmanFord, times);
+	// vectorTimeMedia[2] = calculateTimeMedia (vectorTimeFF, times);
+	// vectorTimeMedia[3] = calculateTimeMedia (vectorTimeFloyd, times);
 
-	vectorTimeMedia[0] = calculateTimeMedia (vectorTimeDijkstra, size);
-	// vectorTimeMedia[1] = calculateTimeMedia (vectorTimeBellmanFord, size);
-	// vectorTimeMedia[2] = calculateTimeMedia (vectorTimeFF, size);
-	// vectorTimeMedia[3] = calculateTimeMedia (vectorTimeFloyd, size);
+	// loadData(ARCHIVES_OUT_PATH, vectorTimeMedia, graph->getNodesAmount());
 
-	loadData(ARCHIVES_OUT_PATH, vectorTimeMedia, graph->getNodesAmount());
+	delete [] vectorTimeMedia;
 }
 
 /**
@@ -73,7 +75,7 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
  * @param 	size 	The size of the vector
  * @return 	result 	The result of the media calculus
  */
-int calculateTimeMedia (int vTimes[], int size) {
+float calculateTimeMedia (int* vTimes, int size) {
 	float media = 0, sum = 0;
 	for (int i = 0; i < size; i++)
 		media += vTimes[i];
@@ -87,5 +89,6 @@ int calculateTimeMedia (int vTimes[], int size) {
 	float result = sum / ((float)size - 1);
 	result = sqrt (result);
 
+	delete [] vTimes;
 	return result;
 }
