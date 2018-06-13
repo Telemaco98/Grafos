@@ -1,14 +1,14 @@
 #include "Calculates.h"
 
 extern const string CALCULATING = " # | (ii)   | Calculating the path shortest with ";
-extern const string ARCHIVES_OUT_PATH = "./data/output/times.dat";
+extern const string DIVISOR 	= " # +---------------------------------------------- ";
 
 /**
  * @brief The function responsible by do the Empirical Analysis
  */
 void calculates () {
 	cleanOutputArchives();
-	int amountInputs = 11; //12
+	int amountInputs = 5; //12
 	int timesToRepeat = 10;
 	
 	for (int i = 0; i < amountInputs; i++) {
@@ -43,7 +43,6 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
 		// Calculate shortest path with Dijkstra
 		cout << CALCULATING + "Dijkstra ..." << endl;
 		vectorTimeDijkstra[i] = dijkstra(origin, destiny, graph);
-		// cout << " # | TEMPO COM DIJKSTRA: " << vectorTimeDijkstra[i] << endl;
 
 		// Calculate shortest path with Belmanford
 		// cout << CALCULATING + "Belmanford ..." << endl;
@@ -60,12 +59,14 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
 	float* vectorTimeMedia = new float[algorithmsQuantity];
  
 	vectorTimeMedia[0] = calculateTimeMedia (vectorTimeDijkstra, times);
+	cout << " # | TEMPO MEDIO COM DIJKSTRA: " << vectorTimeMedia[0] << endl;
 	// vectorTimeMedia[1] = calculateTimeMedia (vectorTimeBellmanFord, times);
 	// vectorTimeMedia[2] = calculateTimeMedia (vectorTimeFF, times);
 	// vectorTimeMedia[3] = calculateTimeMedia (vectorTimeFloyd, times);
 
-	// loadData(ARCHIVES_OUT_PATH, vectorTimeMedia, graph->getNodesAmount());
+	loadDataInArchive(graph->getNodesAmount(), vectorTimeMedia, algorithmsQuantity);
 
+	cout << DIVISOR << endl;
 	delete [] vectorTimeMedia;
 }
 

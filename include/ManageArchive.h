@@ -39,4 +39,12 @@ void cleanOutputArchives ();
  */
 Graph* extractArchive (string pathArchive);
 
+/**
+ * This function put the time data results in the output archive
+ * @param sizeGraph The size of the graph calculated
+ * @param vTimes 	The vetor with the media of the algoritmhs time result
+ * @param sizeV 	The size of the vector
+ */
+void loadDataInArchive (int sizeGraph, float* vTimes, int sizeV);
+
 #endif

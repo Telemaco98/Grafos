@@ -11,6 +11,7 @@ OBJ_DIR=./build
 BIN_DIR=./bin
 DOC_DIR=./doc
 DAT_DIR=./data
+IMG_DIR=./data/images
 
 # Opcoes de compilacao
 CFLAGS=-Wall -pedantic -ansi -std=c++11 -I. -I$(INC_DIR)
@@ -71,6 +72,10 @@ $(OBJ_DIR)/Pair.o: $(SRC_DIR)/Pair.cpp $(INC_DIR)/Pair.h
 
 doc:
 	doxygen
+
+gnuplot: 
+	$(RM) $(IMG_DIR)/*
+	@gnuplot -e "filename=' $(DAT_DIR)/output/times.dat'" $(DAT_DIR)/gnuplot/settings.gnuplot
 
 # Alvo (target) usado para limpar os arquivos temporarios (objeto)
 # gerados durante a compilacao, assim como os arquivos binarios/executaveis.

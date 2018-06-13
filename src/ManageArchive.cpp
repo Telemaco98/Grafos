@@ -9,6 +9,7 @@
  */
 
 #include "ManageArchive.h"
+extern const string ARCHIVES_OUT_PATH = "./data/output/times.dat";
 
 /**
  * @brief This function clean the output archive 
@@ -17,10 +18,9 @@ void cleanOutputArchives () {
 	cout << " # ================================================" << endl;
 	cout << " # | (1)    | Cleaning the output archives ..." << endl;
 	cout << " # +--------+-------------------------------------- " << endl;
-	string pathArchive = "./data/output/output.dat";
 
 	ofstream output;
-	output.open (pathArchive.c_str());
+	output.open (ARCHIVES_OUT_PATH.c_str());
 	output.clear ();
 	output.close ();
 }
@@ -62,4 +62,22 @@ Graph* extractArchive (string pathArchive) {
 		}
 	}
 	return graph;
+}
+
+/**
+ * This function put the time data results in the output ar
+ * @param sizeGraph The size of the graph calculated
+ * @param vTimes 	The vetor with the media of the algoritmhs time result
+ * @param sizeV 	The size of the vector
+ */
+void loadDataInArchive (int sizeGraph, float* vTimes, int sizeV) {
+	ofstream output;
+	output.open(ARCHIVES_OUT_PATH.c_str(), ios::app);
+
+	output << sizeGraph;
+	for (int i = 0; i < sizeV; i++)
+		output << " " << vTimes[i];
+
+	output << endl;
+	output.close();
 }
