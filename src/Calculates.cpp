@@ -8,16 +8,16 @@ extern const string DIVISOR 	= " # +--------------------------------------------
  */
 void calculates () {
 	cleanOutputArchives();
-	int amountInputs = 5; //12
-	int timesToRepeat = 10;
+	int amountInputs = 11; //12
+	int timesToRepeat = 5;
 	
-	for (int i = 0; i < amountInputs; i++) {
+	for (int i = 7; i < amountInputs; i++) {
 		string iString = to_string(i);
 		string inputPath = "./data/input/USA-road-" + iString + ".gr";
 		Graph* graph = extractArchive (inputPath);
-
-		int origin  = rand () % (graph->getNodesAmount());
-		int destiny = rand () % (graph->getNodesAmount());
+		
+		int origin  = 0;//rand () % (graph->getNodesAmount());
+		int destiny = (graph->getNodesAmount()) - 1;//rand () % (graph->getNodesAmount());
 		
 		repeatCalculus(timesToRepeat, graph, origin, destiny);
 
@@ -33,11 +33,9 @@ void calculates () {
  * @param destiny 	The destiny node
  */
 void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
-	int algorithmsQuantity = 1; // 4
+	int algorithmsQuantity = 1; // 3
 	int* vectorTimeDijkstra = new int[times];
-	// int vectorTimeBellmanFord[times];
-	// int vectorTimeFF[times];
-	// int vectorTimeFloyd[times];
+	// int* vectorTimeBellmanFord[times] = new int[times];
 
 	for (int i = 0; i < times; i++) {
 		// Calculate shortest path with Dijkstra
@@ -46,23 +44,16 @@ void repeatCalculus (int times, Graph* graph, int origin, int destiny) {
 
 		// Calculate shortest path with Belmanford
 		// cout << CALCULATING + "Belmanford ..." << endl;
-		// time = bellmanFord (origin, destiny, graph);
-		// cout << " # | TEMPO COM BELLMANFORD: " << time << endl;
-
-		// Calculate shortest path with Ford & Fulkerson
-		// cout << CALCULATING + "Ford & Fulkerson ..." << endl;
-
-		// Calculate shortest path with Floyd
-		// cout << CALCULATING + "Floyd ..." << endl;
+		// vectorTimeBellmanFord[i] = bellmanFord (origin, destiny, graph);
 	}
 
 	float* vectorTimeMedia = new float[algorithmsQuantity];
  
 	vectorTimeMedia[0] = calculateTimeMedia (vectorTimeDijkstra, times);
 	cout << " # | TEMPO MEDIO COM DIJKSTRA: " << vectorTimeMedia[0] << endl;
+
 	// vectorTimeMedia[1] = calculateTimeMedia (vectorTimeBellmanFord, times);
-	// vectorTimeMedia[2] = calculateTimeMedia (vectorTimeFF, times);
-	// vectorTimeMedia[3] = calculateTimeMedia (vectorTimeFloyd, times);
+	// cout << " # | TEMPO MEDIO COM BELLMAN-FORD: " << vectorTimeMedia[0] << endl;
 
 	loadDataInArchive(graph->getNodesAmount(), vectorTimeMedia, algorithmsQuantity);
 

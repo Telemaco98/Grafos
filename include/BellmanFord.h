@@ -18,7 +18,9 @@ using namespace std::chrono;
 
 int bellmanFord (int origin, int destiny, Graph* graph);
 
-bool calculateBellmanFord(int origin, int destiny, Graph* graph, int* distances, int* origins, set<Pair> nodesWithoutCoust);
+bool calculateBellmanFord(int origin, int destiny, Graph* graph, int* distances, int* origins);
+
+bool hasNegativeCicle (Graph* graph, int* weigths, int* origins);
 
 void doPathBellmanFord (int origin, int destiny, int* origins);
 

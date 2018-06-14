@@ -57,7 +57,7 @@ Graph* extractArchive (string pathArchive) {
 			input >> a;
 			int arrestI, arrestJ, distance;
 			input >> arrestI >> arrestJ >> distance;
-
+			
 			graph->addArrest(arrestI-1, arrestJ-1, distance);
 		}
 	}

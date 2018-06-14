@@ -5,71 +5,54 @@
 int bellmanFord (int origin, int destiny, Graph* graph) {
 	int size = graph->getNodesAmount();
 	
-	int* weigths = new int[ size ];
+	int* distance = new int[ size ];
 	int* origins = new int[ size ];
-	set<Pair> nodesWithoutCoust;
 
 	for ( int i = 0; i < size; i++ ) {
-		origins[ i ]   = -1;
-		weigths[ i ] = INFINITO;
-		if ( i != origin ) {	
-			Pair* pair = new Pair ( INFINITO, i );
-			nodesWithoutCoust.insert(*pair);
-		}
+		distance[i] = INFINITO;
+		origins[i] = -1;
 	}
 
-	Pair* pair = new Pair (0, origin);
-	nodesWithoutCoust.insert(*pair);
-	weigths[origin] = 0;
+	distance[origin] = 0;
 
 	auto start_time = high_resolution_clock::now();
-	calculateBellmanFord ( origin, destiny, graph, weigths, origins, nodesWithoutCoust );
+	bool result = calculateBellmanFord ( origin, destiny, graph, distance, origins);
 	auto end_time = high_resolution_clock::now();
 
 	int tempo = duration_cast<microseconds>( end_time - start_time ).count();
 
-	doPathBellmanFord ( origin, destiny, origins );
+	if (result) doPathBellmanFord ( origin, destiny, origins );
 
 	return tempo;
 }
 
-
-bool calculateBellmanFord (int origin, int destiny, Graph* graph, int* weigths, int* origins, set<Pair> nodesWithoutCoust) {
-	set<Pair> allNodes;	
-	while ( !nodesWithoutCoust.empty() ) {
-		auto it = nodesWithoutCoust.begin();
-		Pair pair = *it;
-		allNodes.insert( pair ); // set used to verify the negative cicles
-		nodesWithoutCoust.erase(it);
-		int node = pair.getKey(); // Node in the set with the smallest weigths
-
-		auto adjacents = graph->neighborhood(node);
-
-		for (auto a : adjacents) {
-			if (weigths[a.first] > weigths[node] + a.second) {// first = adjacent node, second = weigths
-				weigths[a.first] = weigths[node] + a.second;
-				origins[a.first] = node;
+bool calculateBellmanFord (int origin, int destiny, Graph* graph, int* distance, int* origins) {
+	for (int i = 1; i < graph->getNodesAmount(); i++) {
+		for (int j = 0; j < graph->getNodesAmount(); j++) {
+			auto adjacents = graph->neighborhood(j);
+			for (auto a : adjacents) {
+				if (distance[a.first] > distance[j] + a.second) { // first = adjacent node, second = weigth
+					distance[a.first] = distance[j] + a.second;
+					origins[a.first] = j;
+				}
 			}
 		}
 	}
 
-	while( !allNodes.empty() ) {
-		auto it = allNodes.begin();
-		Pair pair = *it;
-		allNodes.erase( it );
-		int node = pair.getKey();
+	return (!hasNegativeCicle(graph, distance, origins));
+}
 
-		auto adjacents = graph->neighborhood(node);
-
-		for (auto a : adjacents)  {
-			if (weigths[a.first] > weigths[node] + a.second) {// first = adjacent node, second = weigths
+bool hasNegativeCicle (Graph* graph, int* distance, int* origins) {
+	for (int i = 0; i < graph->getNodesAmount(); i++) {
+		auto adjacents = (graph->neighborhood(i));
+		for (auto a : adjacents) {
+			if (distance[a.first] > distance[i] + a.second) {// first = adjacent node, second = distance
 				cout << "Ciclo negativo encontrado!!" << endl;
-				return false;
+				return true;
 			}
-		} 
-
+		}
 	}
-	return true;
+	return false;
 }
 
 void doPathBellmanFord (int origin, int destiny, int* origins) {
